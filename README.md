@@ -4,3 +4,6 @@ RSS feed reader android application featuring banner photos and headlines. This 
 ## Things to add
  - Improve the color scheme of the application.
  - Improve the applications visual arrangement and appearance.
+ - Uses the Design Support library and its provided widget types (FloatingActionButton, AppBarLayout, SnackBar).
+ - Uses images that are high quality, specific, and full bleed.
+ - Uses fonts that are either the Android defaults, are complementary, and aren't otherwise distracting.
