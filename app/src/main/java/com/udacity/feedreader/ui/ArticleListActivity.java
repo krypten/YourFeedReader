@@ -7,7 +7,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.RecyclerView;
@@ -50,13 +54,17 @@ public class ArticleListActivity extends ActionBarActivity implements
 	// Most time functions can only handle 1902 - 2037
 	private GregorianCalendar START_OF_EPOCH = new GregorianCalendar(2, 1, 1);
 
+	@RequiresApi(api = Build.VERSION_CODES.M)
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_article_list);
 
 		mToolbar = (Toolbar) findViewById(R.id.toolbar);
-		final View toolbarContainerView = findViewById(R.id.toolbar_container);
+		final CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_container);
+		toolbarLayout.setTitle("XYZ Reader");
+		toolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
+		toolbarLayout.setExpandedTitleColor(Color.TRANSPARENT);
 
 		mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
 		mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
