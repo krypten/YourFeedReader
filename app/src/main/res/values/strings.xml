@@ -9,4 +9,7 @@
 
     <string name="up">Up</string>
 
+    <!-- Transition -->
+    <string name="photo_transition">move_to_top</string>
+
 </resources>

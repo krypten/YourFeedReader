@@ -36,11 +36,13 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
+                android:id="@+id/article_photo"
                 android:layout_width="match_parent"
                 android:layout_height="256dp"
                 android:background="@color/theme_accent"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/logo"/>
+                android:src="@drawable/logo"
+                android:transitionName="@string/photo_transition"/>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"

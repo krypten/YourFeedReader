@@ -24,6 +24,7 @@
                     android:layout_height="@dimen/detail_photo_height"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
+                    android:transitionName="@string/photo_transition"
                     />
 
                 <View

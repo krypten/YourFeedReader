@@ -24,6 +24,7 @@
                     android:layout_height="@dimen/detail_photo_height"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
+                    android:transitionName="@string/photo_transition"
                     />
 
                 <View
@@ -35,10 +36,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:paddingLeft="@dimen/detail_metabar_vert_padding"
-                    android:paddingBottom="@dimen/detail_metabar_title_bottom_padding"
                     android:layout_marginBottom="@dimen/detail_metabar_title_bottom_padding"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/detail_metabar_title_bottom_padding"
+                    android:paddingLeft="@dimen/detail_metabar_vert_padding">
 
                     <TextView
                         android:id="@+id/article_title"
@@ -80,8 +81,8 @@
                     android:layout_marginLeft="@dimen/detail_inner_horiz_margin"
                     android:layout_marginRight="@dimen/detail_inner_horiz_margin"
                     android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier"
-                    android:paddingTop="@dimen/detail_body_top_margin"
                     android:paddingBottom="@dimen/detail_body_bottom_margin"
+                    android:paddingTop="@dimen/detail_body_top_margin"
                     android:textColor="@android:color/black"
                     android:textColorLink="@color/theme_accent"
                     android:textSize="@dimen/detail_body_text_size"/>

@@ -1,5 +1,7 @@
 package com.udacity.feedreader.ui;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.app.LoaderManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -22,6 +24,7 @@ import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.udacity.feedreader.R;
@@ -116,7 +119,7 @@ public class ArticleListActivity extends ActionBarActivity implements
 
 	@Override
 	public void onLoadFinished(final Loader<Cursor> cursorLoader, final Cursor cursor) {
-		final Adapter adapter = new Adapter(cursor);
+		final Adapter adapter = new Adapter(cursor, this);
 		adapter.setHasStableIds(true);
 		mRecyclerView.setAdapter(adapter);
 		final int columnCount = getResources().getInteger(R.integer.list_column_count);
@@ -131,10 +134,12 @@ public class ArticleListActivity extends ActionBarActivity implements
 	}
 
 	private class Adapter extends RecyclerView.Adapter<ViewHolder> {
+		private Activity mActivity;
 		private Cursor mCursor;
 
-		public Adapter(final Cursor cursor) {
+		public Adapter(final Cursor cursor, final Activity activity) {
 			mCursor = cursor;
+			mActivity = activity;
 		}
 
 		@Override
@@ -150,8 +155,15 @@ public class ArticleListActivity extends ActionBarActivity implements
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
+					final ImageView imageView = (ImageView) findViewById(R.id.article_photo);
+					final Bundle bundle = ActivityOptions
+							.makeSceneTransitionAnimation(
+									mActivity,
+									imageView,
+									imageView.getTransitionName())
+							.toBundle();
 					startActivity(new Intent(Intent.ACTION_VIEW,
-							ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))));
+							ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))), bundle);
 				}
 			});
 			return vh;
