@@ -25,7 +25,6 @@ import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.udacity.feedreader.R;
@@ -68,7 +67,7 @@ public class ArticleListActivity extends AppCompatActivity implements
 
 		mToolbar = (Toolbar) findViewById(R.id.toolbar);
 		final CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_container);
-		toolbarLayout.setTitle("XYZ Reader");
+		toolbarLayout.setTitle(getResources().getString(R.string.app_title));
 		toolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
 		toolbarLayout.setExpandedTitleColor(Color.TRANSPARENT);
 
@@ -158,7 +157,7 @@ public class ArticleListActivity extends AppCompatActivity implements
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					final ImageView imageView = (ImageView) findViewById(R.id.article_photo);
+					final DynamicHeightNetworkImageView imageView = (DynamicHeightNetworkImageView) view.findViewById(R.id.thumbnail);
 					final Bundle bundle = ActivityOptions
 							.makeSceneTransitionAnimation(
 									mActivity,

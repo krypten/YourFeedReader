@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<slide xmlns:android="http://schemas.android.com/apk/res/android"
+<changeTransform xmlns:android="http://schemas.android.com/apk/res/android"
        android:duration="3000"
        android:interpolator="@android:interpolator/accelerate_cubic"
        android:startDelay="1500">
     <targets>
-        <target android:targetId="@id/article_photo"/>
-        <target android:targetId="@id/photo_container"/>
+        <target android:targetId="@id/thumbnail"/>
+        <target android:targetId="@id/photo"/>
     </targets>
-</slide>
+</changeTransform>

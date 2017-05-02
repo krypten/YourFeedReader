@@ -1,6 +1,7 @@
 <resources>
 
     <string name="app_name" translatable="false">Your Feed Reader</string>
+    <string name="app_title" translatable="false">XYZ Reader</string>
     <string name="welcome_feed_reader">Welcome to your Feed Reader!</string>
 
     <string name="action_refresh">Refresh</string>
@@ -10,6 +11,6 @@
     <string name="up">Up</string>
 
     <!-- Transition -->
-    <string name="photo_transition">move_to_top</string>
+    <string name="photo_transition" translatable="false">move_to_top</string>
 
 </resources>
