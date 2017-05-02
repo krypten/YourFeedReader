@@ -7,9 +7,11 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.graphics.Palette;
@@ -238,11 +240,11 @@ public class ArticleDetailFragment extends Fragment implements
 							final Bitmap bitmap = imageContainer.getBitmap();
 							if (bitmap != null) {
 								final Palette p = Palette.generate(bitmap, 12);
-								mMutedColor = p.getDarkMutedColor(0xFF333333);
-								mPhotoView.setImageBitmap(imageContainer.getBitmap());
-								final View metaBar = mRootView.findViewById(R.id.meta_bar);
-								if (metaBar != null) {
-									metaBar.setBackgroundColor(mMutedColor);
+								mMutedColor = p.getDarkVibrantColor(mMutedColor);
+								mPhotoView.setImageBitmap(bitmap);
+								final View shareFab = mRootView.findViewById(R.id.share_fab);
+								if (shareFab != null) {
+									((LayerDrawable) shareFab.getBackground()).getDrawable(0).setColorFilter(mMutedColor, PorterDuff.Mode.MULTIPLY);
 								}
 								updateStatusBar();
 							}
