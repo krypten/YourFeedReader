@@ -1,13 +1,28 @@
 <resources>
     <dimen name="zero_value">0dp</dimen>
+
+    <!-- app bar -->
+    <dimen name="app_bar_layout_elevation">4dp</dimen>
+    <dimen name="collapsing_toolbar_layout_margin_start">72dp</dimen>
+    <dimen name="toolbar_content_inset_start">72dp</dimen>
+    <dimen name="actionBarSize">16dp</dimen>
+
+    <!-- article -->
+    <dimen name="article_title_padding_side">8dp</dimen>
+    <dimen name="article_title_padding_top_bottom">4dp</dimen>
+    <dimen name="article_subtitle_padding_side">8dp</dimen>
+    <dimen name="article_subtitle_padding_top_bottom">4dp</dimen>
+
     <!-- detail -->
+    <dimen name="detail_action_up_width">56dp</dimen>
     <dimen name="detail_title_text_size">32sp</dimen>
     <dimen name="detail_body_text_size">22sp</dimen>
     <item name="detail_body_line_spacing_multiplier" format="float" type="fraction">1.25</item>
 
+    <!-- fab button -->
     <dimen name="fab_elevation">2dp</dimen>
     <dimen name="fab_press_translation_z">6dp</dimen>
     <dimen name="fab_margin">24dp</dimen>
-    <dimen name="actionBarSize">16dp</dimen>
+    <dimen name="fab_width_height">56dp</dimen>
 
 </resources>
