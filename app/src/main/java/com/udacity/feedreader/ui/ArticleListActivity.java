@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.udacity.feedreader.R;
 import com.udacity.feedreader.data.ArticleLoader;
 import com.udacity.feedreader.data.ItemsContract;
@@ -44,7 +45,7 @@ import java.util.GregorianCalendar;
  * activity presents a grid of items as cards.
  */
 public class ArticleListActivity extends AppCompatActivity implements
-		LoaderManager.LoaderCallbacks<Cursor> {
+	LoaderManager.LoaderCallbacks<Cursor> {
 
 	private static final String TAG = ArticleListActivity.class.toString();
 	private Toolbar mToolbar;
@@ -63,7 +64,7 @@ public class ArticleListActivity extends AppCompatActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_article_list);
 		getWindow().setSharedElementEnterTransition(TransitionInflater.from(this)
-				.inflateTransition(R.transition.image_transform));
+			.inflateTransition(R.transition.image_transform));
 
 		mToolbar = (Toolbar) findViewById(R.id.toolbar);
 		final CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_container);
@@ -89,7 +90,7 @@ public class ArticleListActivity extends AppCompatActivity implements
 	protected void onStart() {
 		super.onStart();
 		registerReceiver(mRefreshingReceiver,
-				new IntentFilter(UpdaterService.BROADCAST_ACTION_STATE_CHANGE));
+			new IntentFilter(UpdaterService.BROADCAST_ACTION_STATE_CHANGE));
 	}
 
 	@Override
@@ -126,7 +127,7 @@ public class ArticleListActivity extends AppCompatActivity implements
 		mRecyclerView.setAdapter(adapter);
 		final int columnCount = getResources().getInteger(R.integer.list_column_count);
 		final StaggeredGridLayoutManager sglm =
-				new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
+			new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
 		mRecyclerView.setLayoutManager(sglm);
 	}
 
@@ -159,13 +160,13 @@ public class ArticleListActivity extends AppCompatActivity implements
 				public void onClick(View view) {
 					final DynamicHeightNetworkImageView imageView = (DynamicHeightNetworkImageView) view.findViewById(R.id.thumbnail);
 					final Bundle bundle = ActivityOptions
-							.makeSceneTransitionAnimation(
-									mActivity,
-									imageView,
-									imageView.getTransitionName())
-							.toBundle();
+						.makeSceneTransitionAnimation(
+							mActivity,
+							imageView,
+							imageView.getTransitionName())
+						.toBundle();
 					startActivity(new Intent(Intent.ACTION_VIEW,
-							ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))), bundle);
+						ItemsContract.Items.buildItemUri(getItemId(vh.getAdapterPosition()))), bundle);
 				}
 			});
 			return vh;
@@ -188,23 +189,23 @@ public class ArticleListActivity extends AppCompatActivity implements
 			holder.titleView.setText(mCursor.getString(ArticleLoader.Query.TITLE));
 			final Date publishedDate = parsePublishedDate();
 			if (!publishedDate.before(START_OF_EPOCH.getTime())) {
-
 				holder.subtitleView.setText(Html.fromHtml(
-						DateUtils.getRelativeTimeSpanString(
-								publishedDate.getTime(),
-								System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
-								DateUtils.FORMAT_ABBREV_ALL).toString()
-								+ "<br/>" + " by "
-								+ mCursor.getString(ArticleLoader.Query.AUTHOR)));
+					DateUtils.getRelativeTimeSpanString(
+						publishedDate.getTime(),
+						System.currentTimeMillis(), DateUtils.HOUR_IN_MILLIS,
+						DateUtils.FORMAT_ABBREV_ALL).toString()
+						+ "<br/>" + " by "
+						+ mCursor.getString(ArticleLoader.Query.AUTHOR)));
 			} else {
 				holder.subtitleView.setText(Html.fromHtml(
-						outputFormat.format(publishedDate)
-								+ "<br/>" + " by "
-								+ mCursor.getString(ArticleLoader.Query.AUTHOR)));
+					outputFormat.format(publishedDate)
+						+ "<br/>" + " by "
+						+ mCursor.getString(ArticleLoader.Query.AUTHOR)));
 			}
-			holder.thumbnailView.setImageUrl(
-					mCursor.getString(ArticleLoader.Query.THUMB_URL),
-					ImageLoaderHelper.getInstance(ArticleListActivity.this).getImageLoader());
+			Glide.with(mActivity)
+				.load(mCursor.getString(ArticleLoader.Query.THUMB_URL))
+				.centerCrop()
+				.into(holder.thumbnailView);
 			holder.thumbnailView.setAspectRatio(mCursor.getFloat(ArticleLoader.Query.ASPECT_RATIO));
 		}
 

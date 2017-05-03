@@ -25,8 +25,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.udacity.feedreader.R;
 import com.udacity.feedreader.data.ArticleLoader;
 
@@ -233,11 +234,13 @@ public class ArticleDetailFragment extends Fragment implements
 
 			}
 			bodyView.setText(Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY).replaceAll("(\r\n|\n)", "<br />")));
-			ImageLoaderHelper.getInstance(getActivity()).getImageLoader()
-				.get(mCursor.getString(ArticleLoader.Query.PHOTO_URL), new ImageLoader.ImageListener() {
+			Glide.with(getActivity())
+				.load(mCursor.getString(ArticleLoader.Query.PHOTO_URL))
+				.asBitmap()
+				.centerCrop()
+				.into(new SimpleTarget<Bitmap>() {
 					@Override
-					public void onResponse(ImageLoader.ImageContainer imageContainer, boolean b) {
-						final Bitmap bitmap = imageContainer.getBitmap();
+					public void onResourceReady(final Bitmap bitmap, final GlideAnimation<? super Bitmap> glideAnimation) {
 						if (bitmap != null) {
 							Palette.from(bitmap)
 								.maximumColorCount(12)
@@ -255,11 +258,6 @@ public class ArticleDetailFragment extends Fragment implements
 								});
 							updateStatusBar();
 						}
-					}
-
-					@Override
-					public void onErrorResponse(VolleyError volleyError) {
-
 					}
 				});
 		} else {
