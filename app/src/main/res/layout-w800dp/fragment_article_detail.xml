@@ -7,7 +7,8 @@
     <com.udacity.feedreader.ui.ObservableScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:nestedScrollingEnabled="true">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -107,6 +108,7 @@
         android:elevation="@dimen/fab_elevation"
         android:src="@drawable/ic_share"
         android:stateListAnimator="@anim/fab_state_list_anim"
+        app:layout_behavior="com.udacity.feedreader.ui.FABBehaviour"
         app:pressedTranslationZ="@dimen/fab_press_translation_z"/>
 
 </com.udacity.feedreader.ui.DrawInsetsFrameLayout>
